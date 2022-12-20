@@ -12,6 +12,7 @@
 #include <QBoxLayout>
 #include <QTreeWidget>
 #include <QAction>
+#include <QScreen>
 #include <QTextDocument>
 #include <QCalendarWidget>
 #include <QTimeLine>
@@ -97,12 +98,21 @@ void MyController::createAndControl()
         return;
 
     QWidget *newWidget = qobject_cast<QWidget *>(newObject);
+
+    // PORT NOTE:
+    // the following chunk of code is here to get the geometry
+    // of the entire virtual desktop because QApplication::desktop() is
+    // deprecated
+    QRegion virtualGeo;
+    for (auto screen : QApplication::screens())
+        virtualGeo += screen->geometry();
+
     if (newWidget) {
         QRect r = newWidget->geometry();
         r.setSize(newWidget->sizeHint());
         r.setWidth(qMax(r.width(), 150));
         r.setHeight(qMax(r.height(), 50));
-        r.moveCenter(QApplication::desktop()->geometry().center());
+        r.moveCenter(virtualGeo.boundingRect().center());
         newWidget->setGeometry(r);
         newWidget->setWindowTitle(tr("Controlled Object: %1").arg(className));
         newWidget->show();

@@ -2712,7 +2712,7 @@ bool QtCanvasPixmapArray::readPixmaps(const QString& datafilenamepattern,
         framecount = 1;
     for (int i = 0; i < framecount; i++) {
         QString r;
-        r.sprintf("%04d", i);
+        r.asprintf("%04d", i);
         if (maskonly) {
             if (!img[i]->collision_mask)
                 img[i]->collision_mask = new QImage();
@@ -3353,9 +3353,18 @@ QSize QtCanvasView::sizeHint() const
 {
     if (!canvas())
         return QScrollArea::sizeHint();
+
+    // PORT NOTE:
+    // the following chunk of code is here to get the size
+    // of the entire virtual desktop because QApplication::desktop() is
+    // deprecated
+    QSize virtualSize;
+    for (auto screen : QGuiApplication::screens())
+        virtualSize += screen->size();
+
     // should maybe take transformations into account
     return (canvas()->size() + 2 * QSize(frameWidth(), frameWidth()))
-           .boundedTo(3 * QApplication::desktop()->size() / 4);
+           .boundedTo(3 * virtualSize / 4);
 }
 
 /*
