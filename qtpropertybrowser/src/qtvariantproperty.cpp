@@ -1679,7 +1679,7 @@ void QtVariantPropertyManager::setValue(QtProperty *property, const QVariant &va
         return;
 #endif
     } else if (QtFlagPropertyManager *flagManager = qobject_cast<QtFlagPropertyManager *>(manager)) {
-        flagManager->setValue(internProp, val.value<QFlag>());
+        flagManager->setValue(internProp, val.value<int>());
         return;
     }
 }
