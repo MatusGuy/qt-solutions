@@ -18,6 +18,7 @@
 #include <QLabel>
 #include <QCheckBox>
 #include <QLineEdit>
+#include <QRegularExpression>
 
 #include <limits.h>
 #include <float.h>
@@ -1266,7 +1267,7 @@ public:
 
     struct Data
     {
-        Data() : regularExpression(QString(QLatin1Char('*')),  Qt::CaseSensitive, Qt::MatchWildcard),
+        Data() : regularExpression(QRegularExpression::wildcardToRegularExpression("*"), (QRegularExpression::PatternOptions) ~QRegularExpression::CaseInsensitiveOption),
             echoMode(QLineEdit::Normal), readOnly(false)
         {
         }

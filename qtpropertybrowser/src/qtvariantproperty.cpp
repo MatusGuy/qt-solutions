@@ -9,6 +9,7 @@
 #include <QIcon>
 #include <QDate>
 #include <QLocale>
+#include <QRegularExpression>
 
 #if defined(Q_CC_MSVC)
 #    pragma warning(disable: 4786) /* MS VS 6: truncating debug info after 255 characters */
