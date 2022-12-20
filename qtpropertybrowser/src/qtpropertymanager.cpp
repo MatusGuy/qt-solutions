@@ -6023,8 +6023,15 @@ void QtFontPropertyManager::setValue(QtProperty *property, const QFont &val)
     if (it == d_ptr->m_values.end())
         return;
 
+
     const QFont oldVal = it.value();
-    if (oldVal == val && oldVal.resolve() == val.resolve())
+
+    // PORT NOTE:
+    // > "oldVal.resolve(val) == val.resolve(oldVal)"
+    // the original source code (check repo history) used an imaginary function called QFont::resolve(),
+    // which doesn't exist. after checking qt docs, the only QFont::resolve i can recall
+    // is QFont::resolve(const QFont &other) so i'm assuming this is what they meant
+    if (oldVal == val && oldVal.resolve(val) == val.resolve(oldVal))
         return;
 
     it.value() = val;
