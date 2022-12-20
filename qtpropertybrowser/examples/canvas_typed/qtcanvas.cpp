@@ -30,8 +30,8 @@ public:
 class QtCanvasViewData {
 public:
     QtCanvasViewData() {}
-    QMatrix xform;
-    QMatrix ixform;
+    QTransform xform;
+    QTransform ixform;
     bool highQuality;
 };
 
@@ -928,12 +928,12 @@ void QtCanvas::advance()
 */
 void QtCanvas::drawViewArea(QtCanvasView* view, QPainter* p, const QRect& vr, bool)
 {
-    QMatrix wm = view->worldMatrix();
-    QMatrix iwm = wm.inverted();
+    QTransform wm = view->worldMatrix();
+    QTransform iwm = wm.inverted();
     // ivr = covers all chunks in vr
     QRect ivr = iwm.mapRect(vr);
 
-    p->setMatrix(wm);
+    p->setTransform(wm);
     drawCanvasArea(ivr, p, false);
 }
 
@@ -3052,7 +3052,7 @@ void QtCanvasSprite::draw(QPainter& painter)
     For example:
 
     \code
-    QMatrix wm;
+    QTransform wm;
     wm.scale(2, 2);   // Zooms in by 2 times
     wm.rotate(90);    // Rotates 90 degrees counter clockwise
                         // around the origin.
@@ -3078,7 +3078,7 @@ void QtCanvasSprite::draw(QPainter& painter)
     QRect canvasRect = myCanvasView->inverseWorldMatrix().mapRect(rc);
     \endcode
 
-    \sa QMatrix QPainter::setWorldMatrix()
+    \sa QTransform QPainter::setWorldMatrix()
 
 */
 
@@ -3278,7 +3278,7 @@ void QtCanvasView::setCanvas(QtCanvas* canvas)
 
     \sa setWorldMatrix() inverseWorldMatrix()
 */
-const QMatrix &QtCanvasView::worldMatrix() const
+const QTransform &QtCanvasView::worldMatrix() const
 {
     return d->xform;
 }
@@ -3289,7 +3289,7 @@ const QMatrix &QtCanvasView::worldMatrix() const
 
     \sa setWorldMatrix() worldMatrix()
 */
-const QMatrix &QtCanvasView::inverseWorldMatrix() const
+const QTransform &QtCanvasView::inverseWorldMatrix() const
 {
     return d->ixform;
 }
@@ -3305,9 +3305,9 @@ const QMatrix &QtCanvasView::inverseWorldMatrix() const
 
     Returns false if \a wm is not invertable; otherwise returns true.
 
-    \sa worldMatrix() inverseWorldMatrix() QMatrix::isInvertible()
+    \sa worldMatrix() inverseWorldMatrix() QTransform::isInvertible()
 */
-bool QtCanvasView::setWorldMatrix(const QMatrix & wm)
+bool QtCanvasView::setWorldMatrix(const QTransform & wm)
 {
     bool ok = wm.isInvertible();
     if (ok) {

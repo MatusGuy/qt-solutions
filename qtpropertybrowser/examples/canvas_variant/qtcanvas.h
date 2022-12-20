@@ -9,6 +9,7 @@
 #include <qpen.h>
 #include <qpolygon.h>
 #include <qscrollarea.h>
+#include <QTransform>
 
 class QtCanvasSprite;
 class QtCanvasPolygonalItem;
@@ -24,7 +25,7 @@ class QtCanvasView;
 class QtCanvasPixmap;
 
 typedef QList<QtCanvasItem *> QtCanvasItemList;
-
+;
 
 class QtCanvasItemExtra;
 
@@ -302,9 +303,9 @@ public:
 	{ return viewing; }
     void setCanvas(QtCanvas* v);
 
-    const QMatrix &worldMatrix() const;
-    const QMatrix &inverseWorldMatrix() const;
-    bool setWorldMatrix(const QMatrix &);
+    const QTransform &worldMatrix() const;
+    const QTransform &inverseWorldMatrix() const;
+    bool setWorldMatrix(const QTransform &);
 
     virtual QSize sizeHint() const;
 
