@@ -1,2 +1,7 @@
-build-*/
+**/build-*/
+**/release/
+**/debug/
+**/lib/
 *.user
+.qmake.stash
+Makefile*
