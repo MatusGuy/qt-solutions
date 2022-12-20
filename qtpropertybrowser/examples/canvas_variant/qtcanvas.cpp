@@ -258,7 +258,7 @@ public:
 
     void sort()
     {
-        qSort(m_list.begin(), m_list.end(), QtCanvasItemLess());
+        std::sort(m_list.begin(), m_list.end(), QtCanvasItemLess());
     }
 
     const QtCanvasItemList &list() const
@@ -1114,7 +1114,7 @@ void QtCanvas::drawCanvasArea(const QRect& inarea, QPainter* p, bool /*double_bu
             }
         }
     }
-    qSort(allvisible.begin(), allvisible.end(), QtCanvasItemLess());
+    std::sort(allvisible.begin(), allvisible.end(), QtCanvasItemLess());
 
     drawBackground(*p, area);
     if (!allvisible.isEmpty()) {
@@ -2312,7 +2312,7 @@ QtCanvasItemList QtCanvas::collisions(const QRect& r) const
     i.setPen(NoPen);
     i.show(); // doesn't actually show, since we destroy it
     QtCanvasItemList l = i.collisions(true);
-    qSort(l.begin(), l.end(), QtCanvasItemLess());
+    std::sort(l.begin(), l.end(), QtCanvasItemLess());
     return l;
 }
 
