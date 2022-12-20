@@ -5,7 +5,6 @@
 #include "qtpropertymanager.h"
 #include "qteditorfactory.h"
 #include "qttreepropertybrowser.h"
-#include <QMatrix>
 #include <QMouseEvent>
 #include <QMenuBar>
 #include <QMenu>

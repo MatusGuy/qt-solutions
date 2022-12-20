@@ -4,7 +4,6 @@
 #include "qtcanvas.h"
 #include <QApplication>
 #include <QBitmap>
-#include <QDesktopWidget>
 #include <QImage>
 #include <QPainter>
 #include <QTimer>

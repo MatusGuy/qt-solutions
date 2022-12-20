@@ -12,7 +12,6 @@
 #include <QBoxLayout>
 #include <QTreeWidget>
 #include <QAction>
-#include <QDesktopWidget>
 #include <QTextDocument>
 #include <QCalendarWidget>
 #include <QTimeLine>
