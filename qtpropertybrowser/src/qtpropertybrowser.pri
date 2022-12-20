@@ -1,7 +1,7 @@
 include(../common.pri)
 greaterThan(QT_MAJOR_VERSION, 4): QT *= widgets gui core
 INCLUDEPATH += $$PWD
-DEPENDPATH += $$PWD
+DEPENDPATH += $$PWD $$PWD/pathedit-ext
 
 qtpropertybrowser-uselib:!qtpropertybrowser-buildlib {
     LIBS += -L$$QTPROPERTYBROWSER_LIBDIR -l$$QTPROPERTYBROWSER_LIBNAME
