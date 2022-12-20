@@ -1266,12 +1266,12 @@ public:
 
     struct Data
     {
-        Data() : regExp(QString(QLatin1Char('*')),  Qt::CaseSensitive, QRegExp::Wildcard),
+        Data() : regularExpression(QString(QLatin1Char('*')),  Qt::CaseSensitive, Qt::MatchWildcard),
             echoMode(QLineEdit::Normal), readOnly(false)
         {
         }
         QString val;
-        QRegExp regExp;
+        QRegularExpression regularExpression;
         int echoMode;
         bool readOnly;
     };
@@ -1289,12 +1289,12 @@ public:
     function, and set using the setValue() slot.
 
     The current value can be checked against a regular expression. To
-    set the regular expression use the setRegExp() slot, use the
-    regExp() function to retrieve the currently set expression.
+    set the regular expression use the setRegularExpression() slot, use the
+    regularExpression() function to retrieve the currently set expression.
 
     In addition, QtStringPropertyManager provides the valueChanged() signal
     which is emitted whenever a property created by this manager
-    changes, and the regExpChanged() signal which is emitted whenever
+    changes, and the regularExpressionChanged() signal which is emitted whenever
     such a property changes its currently set regular expression.
 
     \sa QtAbstractPropertyManager, QtLineEditFactory
@@ -1311,13 +1311,13 @@ public:
 */
 
 /*!
-    \fn void QtStringPropertyManager::regExpChanged(QtProperty *property, const QRegExp &regExp)
+    \fn void QtStringPropertyManager::regularExpressionChanged(QtProperty *property, const QRegularExpression &regularExpression)
 
     This signal is emitted whenever a property created by this manager
     changes its currenlty set regular expression, passing a pointer to
-    the \a property and the new \a regExp as parameters.
+    the \a property and the new \a regularExpression as parameters.
 
-    \sa setRegExp()
+    \sa setRegularExpression()
 */
 
 /*!
@@ -1358,11 +1358,11 @@ QString QtStringPropertyManager::value(const QtProperty *property) const
     If the given \a property is not managed by this manager, this
     function returns an empty expression.
 
-    \sa setRegExp()
+    \sa setRegularExpression()
 */
-QRegExp QtStringPropertyManager::regExp(const QtProperty *property) const
+QRegularExpression QtStringPropertyManager::regularExpression(const QtProperty *property) const
 {
-    return getData<QRegExp>(d_ptr->m_values, &QtStringPropertyManagerPrivate::Data::regExp, property, QRegExp());
+    return getData<QRegularExpression>(d_ptr->m_values, &QtStringPropertyManagerPrivate::Data::regularExpression, property, QRegularExpression());
 }
 
 /*!
@@ -1420,7 +1420,7 @@ QString QtStringPropertyManager::displayText(const QtProperty *property) const
     If the specified \a value doesn't match the given \a property's
     regular expression, this function does nothing.
 
-    \sa value(), setRegExp(), valueChanged()
+    \sa value(), setRegularExpression(), valueChanged()
 */
 void QtStringPropertyManager::setValue(QtProperty *property, const QString &val)
 {
@@ -1433,7 +1433,8 @@ void QtStringPropertyManager::setValue(QtProperty *property, const QString &val)
     if (data.val == val)
         return;
 
-    if (data.regExp.isValid() && !data.regExp.exactMatch(val))
+    QRegularExpression temp(QRegularExpression::anchoredPattern(data.regularExpression.pattern()));
+    if (data.regularExpression.isValid() && !temp.match(val).hasMatch())
         return;
 
     data.val = val;
@@ -1445,11 +1446,11 @@ void QtStringPropertyManager::setValue(QtProperty *property, const QString &val)
 }
 
 /*!
-    Sets the regular expression of the given \a property to \a regExp.
+    Sets the regular expression of the given \a property to \a regularExpression.
 
-    \sa regExp(), setValue(), regExpChanged()
+    \sa regularExpression(), setValue(), regularExpressionChanged()
 */
-void QtStringPropertyManager::setRegExp(QtProperty *property, const QRegExp &regExp)
+void QtStringPropertyManager::setRegularExpression(QtProperty *property, const QRegularExpression &regularExpression)
 {
     const QtStringPropertyManagerPrivate::PropertyValueMap::iterator it = d_ptr->m_values.find(property);
     if (it == d_ptr->m_values.end())
@@ -1457,14 +1458,14 @@ void QtStringPropertyManager::setRegExp(QtProperty *property, const QRegExp &reg
 
     QtStringPropertyManagerPrivate::Data data = it.value() ;
 
-    if (data.regExp == regExp)
+    if (data.regularExpression == regularExpression)
         return;
 
-    data.regExp = regExp;
+    data.regularExpression = regularExpression;
 
     it.value() = data;
 
-    emit regExpChanged(property, data.regExp);
+    emit regularExpressionChanged(property, data.regularExpression);
 }
 
 
