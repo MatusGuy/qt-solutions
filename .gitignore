@@ -2,6 +2,6 @@
 **/release/
 **/debug/
 **/lib/
-*.user
+*.user*
 .qmake.stash
 Makefile*
