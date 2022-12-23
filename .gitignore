@@ -1,7 +1,8 @@
-**/build-*/
+**/build*/
 **/release/
 **/debug/
 **/lib/
+.vscode/
 *.user*
 .qmake.stash
 Makefile*
