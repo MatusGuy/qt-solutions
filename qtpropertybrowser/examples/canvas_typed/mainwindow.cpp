@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 #include "mainwindow.h"
-#include "qtpropertymanager.h"
-#include "qteditorfactory.h"
-#include "qttreepropertybrowser.h"
+#include <qtpropertymanager.h>
+#include <qteditorfactory.h>
+#include <qttreepropertybrowser.h>
 #include <QMouseEvent>
 #include <QMenuBar>
 #include <QMenu>

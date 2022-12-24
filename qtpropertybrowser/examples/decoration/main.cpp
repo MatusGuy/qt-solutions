@@ -4,9 +4,9 @@
 #include <QApplication>
 #include <QMap>
 #include <QDoubleSpinBox>
-#include "qtpropertybrowser.h"
-#include "qteditorfactory.h"
-#include "qttreepropertybrowser.h"
+#include <qtpropertybrowser.h>
+#include <qteditorfactory.h>
+#include <qttreepropertybrowser.h>
 
 class DecoratedDoublePropertyManager : public QtDoublePropertyManager
 {

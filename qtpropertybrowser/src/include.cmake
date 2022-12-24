@@ -1,5 +1,7 @@
 function(bundle_qtpropertybrowser target qpb_pwd)
-    set(CODE
+    set(CMAKE_AUTOMOC ON)
+    target_sources(${target}
+        PUBLIC
         ${qpb_pwd}/qtpropertybrowser.cpp
         ${qpb_pwd}/qtpropertymanager.cpp
         ${qpb_pwd}/qteditorfactory.cpp
@@ -16,17 +18,11 @@ function(bundle_qtpropertybrowser target qpb_pwd)
         ${qpb_pwd}/qtbuttonpropertybrowser.h
         ${qpb_pwd}/qtgroupboxpropertybrowser.h
         ${qpb_pwd}/qtpropertybrowserutils_p.h
-    )
-    qt_wrap_cpp(MOCS ${CODE} TARGET ${target})
-    target_sources(${target}
-        PUBLIC
-        ${CODE}
-        ${MOCS}
         ${qpb_pwd}/qtpropertybrowser.qrc
     )
     target_compile_definitions(${target}
         PUBLIC
         QT_DISABLE_DEPRECATED_BEFORE=0
     )
-    target_include_directories(${target} PUBLIC ${qpd_pwd} ${MOCS})
+    target_include_directories(${target} PUBLIC ${qpb_pwd}/)
 endfunction(bundle_qtpropertybrowser)

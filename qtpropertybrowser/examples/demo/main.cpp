@@ -7,11 +7,11 @@
 #include <QLabel>
 #include <QIcon>
 #include <QMap>
-#include "qtpropertymanager.h"
-#include "qteditorfactory.h"
-#include "qttreepropertybrowser.h"
-#include "qtbuttonpropertybrowser.h"
-#include "qtgroupboxpropertybrowser.h"
+#include <qtpropertymanager.h>
+#include <qteditorfactory.h>
+#include <qttreepropertybrowser.h>
+#include <qtbuttonpropertybrowser.h>
+#include <qtgroupboxpropertybrowser.h>
 
 int main(int argc, char **argv)
 {

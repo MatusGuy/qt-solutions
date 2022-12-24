@@ -2,7 +2,10 @@
 **/release/
 **/debug/
 **/lib/
+**/.vs/
+**/.vscode
 .vscode/
 *.user*
 .qmake.stash
 Makefile*
+CMakeSettings.json

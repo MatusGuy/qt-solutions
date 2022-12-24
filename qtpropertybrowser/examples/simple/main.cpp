@@ -4,9 +4,9 @@
 #include <QApplication>
 #include <QDate>
 #include <QLocale>
-#include "qtpropertymanager.h"
-#include "qtvariantproperty.h"
-#include "qttreepropertybrowser.h"
+#include <qtpropertymanager.h>
+#include <qtvariantproperty.h>
+#include <qttreepropertybrowser.h>
 
 int main(int argc, char **argv)
 {

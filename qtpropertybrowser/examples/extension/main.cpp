@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 #include <QApplication>
-#include "qtvariantproperty.h"
-#include "qteditorfactory.h"
-#include "qttreepropertybrowser.h"
+#include <qtvariantproperty.h>
+#include <qteditorfactory.h>
+#include <qttreepropertybrowser.h>
 
 class VariantManager : public QtVariantPropertyManager
 {
