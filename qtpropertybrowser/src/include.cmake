@@ -1,5 +1,7 @@
 function(bundle_qtpropertybrowser target qpb_pwd)
     set(CMAKE_AUTOMOC ON)
+    set(RES ${qpb_pwd}/qtpropertybrowser.qrc)
+    qt_add_resources(RES ${RES})
     target_sources(${target}
         PUBLIC
         ${qpb_pwd}/qtpropertybrowser.cpp
@@ -18,7 +20,6 @@ function(bundle_qtpropertybrowser target qpb_pwd)
         ${qpb_pwd}/qtbuttonpropertybrowser.h
         ${qpb_pwd}/qtgroupboxpropertybrowser.h
         ${qpb_pwd}/qtpropertybrowserutils_p.h
-        ${qpb_pwd}/qtpropertybrowser.qrc
     )
     target_compile_definitions(${target}
         PUBLIC

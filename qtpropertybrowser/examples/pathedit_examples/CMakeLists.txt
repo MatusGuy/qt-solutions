@@ -1,5 +1,5 @@
 project(
-    qtpropertybrowser-examples
+    pathedit-examples
     LANGUAGES CXX
     VERSION 1.0
 )
@@ -15,7 +15,8 @@ macro(subdirlist result curdir)
     set(${result} ${dirlist})
 endmacro()
 
-include(../src/include.cmake)
+include(../../src/include.cmake)
+include(../../pathedit-ext/include.cmake)
 
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets)
 
@@ -26,10 +27,6 @@ find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets)
 subdirlist(EXAMPLES ${PROJECT_SOURCE_DIR})
 
 foreach(EXAMPLE ${EXAMPLES})
-    if (${EXAMPLE} STREQUAL "pathedit_examples")
-        continue()
-    endif()
-
     file(GLOB RESOURCES ${EXAMPLE}/*.qrc)
     foreach(QRC ${RESOURCES})
         qt_add_resources(RESOURCES ${QRC})
@@ -37,7 +34,8 @@ foreach(EXAMPLE ${EXAMPLES})
 
     file(GLOB CODE ${EXAMPLE}/*.cpp ${EXAMPLE}/*.h)
     qt_add_executable(${EXAMPLE} ${CODE} ${RESOURCES})
-    bundle_qtpropertybrowser(${EXAMPLE} ../src)
+    bundle_qtpropertybrowser(${EXAMPLE} ../../src)
+    bundle_pathedit_ext(${EXAMPLE} ../../pathedit-ext)
 
     target_link_libraries(${EXAMPLE} PUBLIC
         Qt::Core
@@ -45,5 +43,3 @@ foreach(EXAMPLE ${EXAMPLES})
         Qt::Widgets
     )
 endforeach()
-
-add_subdirectory(pathedit_examples)
